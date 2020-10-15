@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- colors: #E5C480 #586884 #98B6B8 #E5BDB8 -->
+<html lang="ru">
+    <head>
+        <title>Справочник</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+		.jumbotron {
+			background-color: #E5C480;
+		}
+		body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+.input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.icon {
+  padding: 10px;
+  background: #98B6B8;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+}
+
+.input-field:focus {
+  border: 2px solid #98B6B8;
+}
+	</style>
+	<body ng-app="myApp" ng-controller="myCtrl">
+		<div class="jumbotron text-center">
+      <div >
+        <h1>{{myHeader}}</h1><br>
+      </div>
+    </div>
+		<div ng-app="myApp" ng-controller="myCtrl" style="margin: 4vw;" ng-init="correcr_user='asap'; correcr_pass='rocky';">
+                <form name="myForm" action="index.html" method="post">
+                    <div class="form-group">
+                        <label>Логин: </label>
+						<div class="input-container">
+							<i class="fa fa-user icon"></i>
+							<input class="input-field" type="text" name="user" ng-model="user" class="form-control" required>
+						</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль: </label>
+						<div class="input-container">
+							<i class="fa fa-key icon"></i>
+							<input class="input-field" type="password" name="password" ng-model="password" class="form-control" required>
+						</div>
+                    </div>
+                    <br>
+                    <!-- по нажатию на кнопку отображается введенная информация -->
+                    <input type="submit" onsubmit="return validateForm()" style="background-color: #586884; color: #fff" class="btn btn-default btn-inline" value="Вход" ng-disabled="!(correcr_user==user && correcr_pass==password)">
+                    <input type="reset" style="background-color: #E5BDB8;" class="btn btn-default btn-inline" value="Сбросить">
+                </form>
+            </div>
+        </div>
+		  <script>
+            var app = angular.module('myApp', []);
+            app.controller('myCtrl', function($scope) {
+                    
+            });
+        </script>
+    <script>
+      var app = angular.module('myApp', []);
+      app.controller('myCtrl', function($scope, $timeout) {
+        $scope.myHeader = "Добро пожаловать в наш телефоный справочник";
+        $timeout(function () {
+          $scope.myHeader = "Для просмотра информации, пожалуйста, войдите в систему";
+        }, 4000);
+      });
+    </script>
+	</body>
+</html>
